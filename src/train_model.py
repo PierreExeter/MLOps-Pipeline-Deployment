@@ -13,7 +13,7 @@ s = setup(data = insurance,
           polynomial_features = True,
           bin_numeric_features= ['age', 'bmi'])
 
-# train model
+# train model (linear regression)
 lr = create_model('lr')
 
 # save model

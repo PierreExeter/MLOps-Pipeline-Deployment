@@ -1,4 +1,4 @@
-from flask import Flask,request, url_for, redirect, render_template, jsonify
+from flask import Flask, request, url_for, redirect, render_template, jsonify
 from pycaret.regression import load_model, predict_model
 import pandas as pd
 import pickle
@@ -14,7 +14,7 @@ def home():
     return render_template("home.html")
 
 
-@app.route('/predict',methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
     int_features = [x for x in request.form.values()]
     final = np.array(int_features)
@@ -25,9 +25,9 @@ def predict():
     
     prediction = predict_model(model, data=data_unseen, round = 0)
     prediction = int(prediction['prediction_label'][0])
-    return render_template('home.html',pred='Expected Bill will be ${}'.format(prediction))
+    return render_template('home.html', pred='The expected bill for this person is ${}.'.format(prediction))
 
-@app.route('/predict_api',methods=['POST'])
+@app.route('/predict_api', methods=['POST'])
 def predict_api():
     '''
     For direct API calls trought request

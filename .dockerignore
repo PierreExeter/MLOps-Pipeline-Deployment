@@ -1,0 +1,15 @@
+# Version control
+.git/
+.gitignore
+
+# Files
+img/
+logs.log
+README.md
+LICENSE
+src/api_call_example.py
+src/train_model.py
+
+# Docker
+Dockerfile
+.dockerignore

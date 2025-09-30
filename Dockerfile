@@ -1,18 +1,23 @@
-FROM python:3.11
+# Dockerfile
+FROM python:3.11-slim
 
-RUN pip install virtualenv
-ENV VIRTUAL_ENV=/venv
-RUN virtualenv venv -p python3
-ENV PATH="VIRTUAL_ENV/bin:$PATH"
-
+# Change working directory to /app
 WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    gcc \
+    g++ \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -U -r requirements.txt
+
+# Copy files to /app
 ADD . /app
-
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Run the training script to generate pycaret-model.pkl
-RUN python src/train_model.py
 
 # Expose port 
 EXPOSE 5000
