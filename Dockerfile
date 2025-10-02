@@ -23,4 +23,8 @@ ADD . /app
 EXPOSE 5000
 
 # Run the application
-CMD ["python", "src/app.py"]
+# Development
+# CMD ["python", "src/app.py"]
+
+# Production
+CMD ["python", "src/app.py", "--production"]

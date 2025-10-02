@@ -2,6 +2,8 @@
 
 ![app_screenshot](img/app_screenshot.png)
 
+[VIEW DEPLOYED APP HERE](https://insurance-predictions.azurewebsites.net/)
+
 This project demonstrates a MLOps pipeline for deploying a machine learning model into a production-ready web application. The goal is to help an insurance company forecast patient charges using input like age, BMI, and smoking status.
 
 The solution includes:
@@ -85,7 +87,7 @@ Go to the Docker tab and fill the following details:
 - tag : latest
 - port : 5000
 
-7. The app is running and deployed on [https://insurance-predictions.azurewebsites.net](https://insurance-predictions.azurewebsites.net) 
+7. The app is running and deployed to [https://insurance-predictions.azurewebsites.net](https://insurance-predictions.azurewebsites.net/) 
 
 
 
