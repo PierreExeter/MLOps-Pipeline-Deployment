@@ -115,7 +115,12 @@ python src/train_model.py
 
 4. Run the app locally
 ```
+# development
 python src/app.py
+
+# production
+python src/app.py --production
+
 ```
 
 The web app is served on [http://localhost:5000/](http://localhost:5000/)
