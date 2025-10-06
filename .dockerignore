@@ -9,6 +9,9 @@ README.md
 LICENSE
 src/api_call_example.py
 src/train_model.py
+.pytest_cache
+.ruff_cache
+src/__pycache__/
 
 # Docker
 Dockerfile

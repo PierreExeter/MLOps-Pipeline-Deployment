@@ -1,8 +1,7 @@
-from flask import Flask, request, url_for, redirect, render_template, jsonify
+from flask import Flask, request, render_template, jsonify
 from pycaret.regression import load_model, predict_model
 from waitress import serve
 import pandas as pd
-import pickle
 import numpy as np
 import sys
 
@@ -31,9 +30,6 @@ def predict():
     final = np.array(int_features)
     col = ['age', 'sex', 'bmi', 'children', 'smoker', 'region']
     data_unseen = pd.DataFrame([final], columns = col)
-    #print("int_features: ", int_features)
-    #print("final:", final)
-    #print("data_unseen:", data_unseen)
     
     prediction = predict_model(model, data=data_unseen, round = 0)
     prediction = int(prediction['prediction_label'][0])
