@@ -10,8 +10,9 @@ The solution includes:
 - A **machine learning** model trained to predict insurance charges
 - A **Flask back-end** to serve predictions
 - A simple **HTML front-end** for user input
-- Full containerization with **Docker**
+- Containerization with **Docker**
 - Cloud deployment on **Microsoft Azure**
+- A CI pipeline with **Github Actions**
 
 
 ## Docker Install (recommended)
