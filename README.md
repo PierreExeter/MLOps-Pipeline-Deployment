@@ -4,15 +4,15 @@
 
 [VIEW DEPLOYED APP HERE](https://insurance-predictions.azurewebsites.net/)
 
-This project demonstrates a MLOps pipeline for deploying a machine learning model into a production-ready web application. The goal is to help an insurance company forecast patient charges using input like age, BMI, and smoking status.
+This project demonstrates a MLOps pipeline for deploying a machine learning model into a production-ready web application. The goal is to help an insurance company forecast patient charges using input like age, gender, BMI, number of children, and smoking status.
 
 The solution includes:
 - A **machine learning** model trained to predict insurance charges
 - A **Flask back-end** to serve predictions
-- A simple **HTML front-end** for user input
+- A **HTML / CSS front-end** for user input
 - Containerization with **Docker**
 - Cloud deployment on **Microsoft Azure**
-- A CI pipeline with **Github Actions**
+- A CI/CD pipeline with **Github Actions**
 
 
 ## Docker Install (recommended)

@@ -1,4 +1,10 @@
 logs.log
+src/__pycache__/
+
+# Unit test
 .pytest_cache
 .ruff_cache
-src/__pycache__/
+
+
+# Sphinx documentation
+docs/_build/
