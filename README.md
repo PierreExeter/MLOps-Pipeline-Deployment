@@ -1,6 +1,6 @@
 # MLOps Pipeline Deployment
 
-![app_screenshot](img/app_screenshot.png)
+![app_screenshot](docs/img/app_screenshot.png)
 
 [VIEW DEPLOYED APP HERE](https://insurance-predictions.azurewebsites.net/)
 
@@ -13,6 +13,7 @@ The solution includes:
 - Containerization with **Docker**
 - Cloud deployment on **Microsoft Azure**
 - A CI/CD pipeline with **Github Actions**
+- A product **documentation**
 
 
 ## Docker Install (recommended)
