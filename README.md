@@ -93,7 +93,6 @@ Go to the Docker tab and fill the following details:
 
 
 
-
 ## Local Install
 
 1. Clone the repository
@@ -102,12 +101,24 @@ Go to the Docker tab and fill the following details:
 git clone https://github.com/PierreExeter/MLOps-Pipeline-Deployment
 ```
 
-2. Install the dependencies
+2. Install [uv](https://github.com/astral-sh/uv)
 
 ```
-conda create -n pycaret-env python=3.11 -y
-conda activate pycaret-env
-pip install -U -r requirements.txt
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+3. Create and activate the environment
+
+```
+uv venv --python 3.11
+source .venv/bin/activate
+```
+
+
+4. Install the dependencies
+
+```
+uv pip install -r requirements.txt
 ```
 
 3. Train the model

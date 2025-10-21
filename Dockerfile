@@ -12,12 +12,18 @@ RUN apt-get update && \
     libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install Python dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -U -r requirements.txt
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:0.9.4 /uv /uvx /bin/
 
 # Copy files to /app
 ADD . /app
+
+# Create and activate virtual environment
+RUN uv venv --python 3.11
+ENV PATH="/app/.venv/bin:$PATH"
+
+# Install dependencies
+RUN uv pip install --no-cache-dir -U -r requirements.txt
 
 # Expose port 
 EXPOSE 5000
