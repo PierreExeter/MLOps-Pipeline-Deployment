@@ -64,7 +64,7 @@ docker stop <container-id>
 docker login insurancemodel.azurecr.io
 ```
 The username is name of the registry, in this example "insurancemodel".
-The password can be found in Azure Container Registry > Access keys. Tick the box "admin user" to reveal the password.
+The password can be found in Azure Container Registry > Settings > Access keys. Tick the box "admin user" to reveal the password.
 
 4. Push the image to the Azure registry
 ```
@@ -113,7 +113,6 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv venv --python 3.11
 source .venv/bin/activate
 ```
-
 
 4. Install the dependencies
 
