@@ -1,10 +1,10 @@
 logs.log
 src/__pycache__/
+.venv/
 
 # Unit test
 .pytest_cache
 .ruff_cache
-
 
 # Sphinx documentation
 docs/build/

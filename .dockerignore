@@ -2,16 +2,27 @@
 .git/
 .gitignore
 
-# Files
-img/
+# Files and folders to exclude from build context
+__pycache__/
+.pytest_cache
+.ruff_cache
+*.py[cod]
+.venv/
+
+# Version control
+.git/
+
+# Local stuff / docs / artifacts
+docs/build/
+docs/_build/
+docs/img/
 logs.log
+*.log
+LICENSE
 README.md
 LICENSE
 src/api_call_example.py
 src/train_model.py
-.pytest_cache
-.ruff_cache
-src/__pycache__/
 
 # Docker
 Dockerfile

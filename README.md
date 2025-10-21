@@ -120,24 +120,25 @@ source .venv/bin/activate
 uv pip install -r requirements.txt
 ```
 
-3. Train the model
+5. Train the model
+
 ```
 python src/train_model.py
 ```
 
-4. Run the app locally
+6. Run the app locally
+
 ```
 # development
 python src/app.py
 
 # production
 python src/app.py --production
-
 ```
 
 The web app is served on [http://localhost:5000/](http://localhost:5000/)
 
-5. Test sending a request to the API
+7. Test sending a request to the API
 
 ```
 python src/api_call_example.py
