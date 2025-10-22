@@ -146,6 +146,19 @@ body {
   gap: 8px;
 }
 
+/* Region Grid Layout - 2x2 arrangement */
+.region-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.region-row {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-start;
+}
+
 .radio-option {
   display: flex;
   align-items: center;
@@ -264,6 +277,11 @@ body {
 
   .radio-option {
     margin-bottom: 4px;
+  }
+
+  /* Region grid becomes single column on very small screens */
+  .region-row {
+    gap: 8px;
   }
 
   .btn-large {
