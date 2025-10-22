@@ -251,7 +251,7 @@ body {
 
   .radio-options {
     gap: 8px;
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .radio-options label {
