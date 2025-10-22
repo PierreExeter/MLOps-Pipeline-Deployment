@@ -123,7 +123,7 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
 }
 
 .radio-options label {
@@ -146,6 +146,19 @@ body {
   gap: 8px;
 }
 
+/* Region Grid Layout - 2x2 arrangement */
+.region-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.region-row {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
 .radio-option {
   display: flex;
   align-items: center;
@@ -154,9 +167,12 @@ body {
 .radio-option label {
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
   color: #fff;
   margin: 0;
+  min-width: 90px;
+  text-align: center;
 }
 
 .radio-option input[type="radio"] {
@@ -251,7 +267,7 @@ body {
 
   .radio-options {
     gap: 8px;
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .radio-options label {
@@ -264,6 +280,11 @@ body {
 
   .radio-option {
     margin-bottom: 4px;
+  }
+
+  /* Region grid becomes single column on very small screens */
+  .region-row {
+    gap: 15px;
   }
 
   .btn-large {
@@ -321,32 +342,7 @@ body {
   }
 }
 
-/* Slider improvements for touch devices */
-@media (pointer: coarse) {
-  .slider {
-    height: 40px;
-    -webkit-appearance: none;
-    cursor: pointer;
-  }
 
-  .slider::-webkit-slider-thumb {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    background: #4a77d4;
-    cursor: pointer;
-    -webkit-appearance: none;
-  }
-
-  .slider::-moz-range-thumb {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    background: #4a77d4;
-    cursor: pointer;
-    border: none;
-  }
-}
 
 /* Ensure form elements are accessible and usable */
 @media (max-width: 480px) {
