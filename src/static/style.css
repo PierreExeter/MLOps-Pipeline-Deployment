@@ -321,32 +321,7 @@ body {
   }
 }
 
-/* Slider improvements for touch devices */
-@media (pointer: coarse) {
-  .slider {
-    height: 40px;
-    -webkit-appearance: none;
-    cursor: pointer;
-  }
 
-  .slider::-webkit-slider-thumb {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    background: #4a77d4;
-    cursor: pointer;
-    -webkit-appearance: none;
-  }
-
-  .slider::-moz-range-thumb {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    background: #4a77d4;
-    cursor: pointer;
-    border: none;
-  }
-}
 
 /* Ensure form elements are accessible and usable */
 @media (max-width: 480px) {
