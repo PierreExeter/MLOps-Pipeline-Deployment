@@ -16,19 +16,19 @@ Docker Install
 
 ::
 
-   docker build -t insurancemodel.azurecr.io/pycaret-insurance:latest .
+   docker build -t insurancemodel.azurecr.io/mlops-insurance-prediction:latest .
 
-The diferent elements in this command are : 
+The diferent elements in this command are :
 
-- Azure registry name : insurancemodel.azurecr.io 
-- Docker image name : pycaret-insurance 
+- Azure registry name : insurancemodel.azurecr.io
+- Docker image name : mlops-insurance-prediction
 - tag : latest
 
 3. Run the Docker container
 
 ::
 
-   docker run -d -p 5000:5000 insurancemodel.azurecr.io/pycaret-insurance
+   docker run -d -p 5000:5000 insurancemodel.azurecr.io/mlops-insurance-prediction
 
 The web app is served on http://localhost:5000/
 
@@ -78,4 +78,3 @@ Local Install
    python src/app.py --production
 
 The web app is served on http://localhost:5000/
-
