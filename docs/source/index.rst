@@ -6,21 +6,47 @@ Welcome to Insurance Predictor's documentation!
    :align: center
 
    The app's interface.
-   
 
 `VIEW DEPLOYED APP HERE <https://insurance-predictions.azurewebsites.net/>`__
 
 This project demonstrates a MLOps pipeline for deploying a machine learning model into a production-ready web application. The goal is to help an insurance company forecast patient charges using input like age, gender, BMI, number of children, and smoking status.
 
-The solution includes: 
+Technical Architecture
+----------------------
 
-* A **machine learning** model trained to predict insurance charges 
-* A **Flask back-end** to serve predictions 
-* A **HTML / CSS front-end** for user input 
-* Containerization with **Docker** 
-* Cloud deployment on **Microsoft Azure** 
-* A CI/CD pipeline with **Github Actions** 
-* A product **documentation**
+.. figure:: ../img/app_diagram.svg
+   :alt: Application Architecture
+   :align: center
+   :width: 100%
+
+   System architecture overview
+
+**Machine Learning Model**
+
+- **Algorithm**: Ensemble model using PyCaret AutoML framework
+- **Training Data**: US Insurance dataset with demographic and health features
+- **Target Variable**: Insurance charge amount (USD)
+- **Model Format**: Serialized pickle file for production deployment
+
+**Web Application**
+
+- **Backend**: Python Flask application serving predictions via REST API
+- **Frontend**: Responsive HTML/CSS interface with JavaScript validation
+- **API**: JSON-based endpoints for programmatic access
+- **Server**: Production-ready Waitress WSGI server for concurrent requests
+
+**Containerization & Deployment**
+
+- **Container**: Docker image based on Python 3.11 runtime
+- **Registry**: Azure Container Registry for secure image storage
+- **Orchestration**: Azure Web App for container hosting
+
+**CI/CD Pipeline**
+
+- **Version Control**: Git with GitHub for repository management
+- **Automation**: GitHub Actions workflows for build/test/deploy
+- **Testing**: Pytest-based unit test suite covering API endpoints
+- **Security**: Encrypted secrets for cloud resource credentials
 
 Contents
 --------

@@ -1,0 +1,10 @@
+```mermaid
+flowchart TB
+    A[👨‍💻 Developer] 
+    A -->|Git Push| B[GitHub Repository]
+    B -->|Triggers| C[GitHub Actions<br/>CI/CD Pipeline]
+    C -->|Tests Pass ✅| D[Docker Build]
+    D -->|Push Image| E[Azure Container<br/>Registry]
+    E -->|Deploy| F[Azure Web App<br/>insurance-predictions]
+    F -->|Serves| G[🌐 End Users]
+```
