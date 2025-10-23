@@ -27,18 +27,18 @@ git clone https://github.com/PierreExeter/MLOps-Pipeline-Deployment
 2. Build the image
 
 ```
-docker build -t insurancemodel.azurecr.io/pycaret-insurance:latest .
+docker build -t insurancemodel.azurecr.io/mlops-insurance-prediction:latest .
 ```
 
 The diferent elements in this command are : 
 - Azure registry name : insurancemodel.azurecr.io
-- Docker image name : pycaret-insurance
+- Docker image name : mlops-insurance-prediction
 - tag : latest
 
 
 3. Run the Docker container
 ```
-docker run -d -p 5000:5000 insurancemodel.azurecr.io/pycaret-insurance
+docker run -d -p 5000:5000 insurancemodel.azurecr.io/mlops-insurance-prediction
 ```
 
 The web app is served on [http://localhost:5000/](http://localhost:5000/)
@@ -66,9 +66,9 @@ docker login insurancemodel.azurecr.io
 The username is name of the registry, in this example "insurancemodel".
 The password can be found in Azure Container Registry > Settings > Access keys. Tick the box "admin user" to reveal the password.
 
-4. Push the image to the Azure registry
+4. Push the image to ACR
 ```
-docker push insurancemodel.azurecr.io/pycaret-insurance:latest
+docker push insurancemodel.azurecr.io/mlops-insurance-prediction:latest
 ```
 
 This will take some time, depending on the size of the image. The image should appear in the ACR.
@@ -85,7 +85,7 @@ Select the following options:
 Go to the Docker tab and fill the following details:
 - Source : Azure Container Registry
 - Registry : insurancemodel
-- Image : pycaret-insurance
+- Image : mlops-insurance-prediction
 - tag : latest
 - port : 5000
 

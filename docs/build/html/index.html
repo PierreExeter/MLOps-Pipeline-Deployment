@@ -1,21 +1,21 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome to Insurance Predictor’s documentation! &mdash; MLOps Pipeline Deployment 0.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e031e9a9"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,9 +33,6 @@
           <a href="#" class="icon icon-home">
             MLOps Pipeline Deployment
           </a>
-              <div class="version">
-                0.1.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -46,7 +43,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment on Azure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">App Deployment to Azure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="unit_test.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
@@ -77,27 +74,54 @@
            <div itemprop="articleBody">
              
   <section id="welcome-to-insurance-predictor-s-documentation">
-<h1>Welcome to Insurance Predictor’s documentation!<a class="headerlink" href="#welcome-to-insurance-predictor-s-documentation" title="Permalink to this heading"></a></h1>
+<h1>Welcome to Insurance Predictor’s documentation!<a class="headerlink" href="#welcome-to-insurance-predictor-s-documentation" title="Link to this heading"></a></h1>
 <figure class="align-center" id="id1">
 <img alt="app_screenshot" src="_images/app_screenshot.png" />
 <figcaption>
-<p><span class="caption-text">The app’s interface.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The app’s interface.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p><a class="reference external" href="https://insurance-predictions.azurewebsites.net/">VIEW DEPLOYED APP HERE</a></p>
 <p>This project demonstrates a MLOps pipeline for deploying a machine learning model into a production-ready web application. The goal is to help an insurance company forecast patient charges using input like age, gender, BMI, number of children, and smoking status.</p>
-<p>The solution includes:</p>
+<section id="technical-architecture">
+<h2>Technical Architecture<a class="headerlink" href="#technical-architecture" title="Link to this heading"></a></h2>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/app_diagram.svg"><img alt="Application Architecture" src="_images/app_diagram.svg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">System architecture overview</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>Machine Learning Model</strong></p>
 <ul class="simple">
-<li><p>A <strong>machine learning</strong> model trained to predict insurance charges</p></li>
-<li><p>A <strong>Flask back-end</strong> to serve predictions</p></li>
-<li><p>A <strong>HTML / CSS front-end</strong> for user input</p></li>
-<li><p>Containerization with <strong>Docker</strong></p></li>
-<li><p>Cloud deployment on <strong>Microsoft Azure</strong></p></li>
-<li><p>A CI/CD pipeline with <strong>Github Actions</strong></p></li>
-<li><p>A product <strong>documentation</strong></p></li>
+<li><p><strong>Algorithm</strong>: Ensemble model using PyCaret AutoML framework</p></li>
+<li><p><strong>Training Data</strong>: US Insurance dataset with demographic and health features</p></li>
+<li><p><strong>Target Variable</strong>: Insurance charge amount (USD)</p></li>
+<li><p><strong>Model Format</strong>: Serialized pickle file for production deployment</p></li>
 </ul>
+<p><strong>Web Application</strong></p>
+<ul class="simple">
+<li><p><strong>Backend</strong>: Python Flask application serving predictions via REST API</p></li>
+<li><p><strong>Frontend</strong>: Responsive HTML/CSS interface with JavaScript validation</p></li>
+<li><p><strong>API</strong>: JSON-based endpoints for programmatic access</p></li>
+<li><p><strong>Server</strong>: Production-ready Waitress WSGI server for concurrent requests</p></li>
+</ul>
+<p><strong>Containerization &amp; Deployment</strong></p>
+<ul class="simple">
+<li><p><strong>Container</strong>: Docker image based on Python 3.11 runtime</p></li>
+<li><p><strong>Registry</strong>: Azure Container Registry for secure image storage</p></li>
+<li><p><strong>Orchestration</strong>: Azure Web App for container hosting</p></li>
+</ul>
+<p><strong>CI/CD Pipeline</strong></p>
+<ul class="simple">
+<li><p><strong>Version Control</strong>: Git with GitHub for repository management</p></li>
+<li><p><strong>Automation</strong>: GitHub Actions workflows for build/test/deploy</p></li>
+<li><p><strong>Testing</strong>: Pytest-based unit test suite covering API endpoints</p></li>
+<li><p><strong>Security</strong>: Encrypted secrets for cloud resource credentials</p></li>
+</ul>
+</section>
 <section id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading"></a></h2>
+<h2>Contents<a class="headerlink" href="#contents" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
@@ -105,9 +129,56 @@
 <li class="toctree-l2"><a class="reference internal" href="install.html#local-install">Local Install</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment on Azure</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="unit_test.html">Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">App Deployment to Azure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#manual-deployment">Manual Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#continuous-deployment-with-github-actions">Continuous Deployment with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#step-1-create-azure-service-principal">Step 1: Create Azure Service Principal</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#get-resource-ids">Get Resource IDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#create-service-principal">Create Service Principal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#grant-acr-push-permission">Grant ACR Push Permission</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#step-2-configure-github-secrets">Step 2: Configure GitHub Secrets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#azure-credentials">1. AZURE_CREDENTIALS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#azure-registry-username">2. AZURE_REGISTRY_USERNAME</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#azure-registry-password">3. AZURE_REGISTRY_PASSWORD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#step-3-verify-workflow-configuration">Step 3: Verify Workflow Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#step-4-understanding-workflow-execution">Step 4: Understanding Workflow Execution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#workflow-chain">Workflow Chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#automatic-trigger">Automatic Trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#manual-trigger">Manual Trigger</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#workflow-fails-at-log-in-to-azure-container-registry">Workflow fails at “Log in to Azure Container Registry”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#workflow-fails-at-deploy-to-azure-web-app">Workflow fails at “Deploy to Azure Web App”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#docker-build-fails">Docker build fails</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#image-tags">Image Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#security-notes">Security Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#predict-api-post">/predict_api (POST)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#request-examples">Request Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="unit_test.html">Unit Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="unit_test.html#running-tests">Running Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit_test.html#test-coverage">Test Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit_test.html#test-data">Test Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit_test.html#expected-outcomes">Expected Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit_test.html#debugging-failed-tests">Debugging Failed Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit_test.html#skipping-slow-tests">Skipping Slow Tests</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
 </ul>
 </div>

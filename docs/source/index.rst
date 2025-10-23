@@ -6,28 +6,13 @@ Welcome to Insurance Predictor's documentation!
    :align: center
 
    The app's interface.
-   
 
-.. centered::
-
-   `VIEW DEPLOYED APP HERE <https://insurance-predictions.azurewebsites.net/>`__
+`VIEW DEPLOYED APP HERE <https://insurance-predictions.azurewebsites.net/>`__
 
 This project demonstrates a MLOps pipeline for deploying a machine learning model into a production-ready web application. The goal is to help an insurance company forecast patient charges using input like age, gender, BMI, number of children, and smoking status.
 
-The solution includes:
-
-* A **machine learning** model trained to predict insurance charges
-* A **Flask back-end** to serve predictions
-* A **HTML / CSS front-end** for user input
-* Containerization with **Docker**
-* Cloud deployment on **Microsoft Azure**
-* A CI/CD pipeline with **Github Actions**
-* A product **documentation**
-
 Technical Architecture
 ----------------------
-
-**Application Stack**
 
 .. figure:: ../img/app_diagram.svg
    :alt: Application Architecture
@@ -55,7 +40,6 @@ Technical Architecture
 - **Container**: Docker image based on Python 3.11 runtime
 - **Registry**: Azure Container Registry for secure image storage
 - **Orchestration**: Azure Web App for container hosting
-- **Domain**: Custom URL via Azure's app service
 
 **CI/CD Pipeline**
 

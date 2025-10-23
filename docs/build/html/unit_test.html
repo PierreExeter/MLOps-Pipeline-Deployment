@@ -1,21 +1,21 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unit Tests &mdash; MLOps Pipeline Deployment 0.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e031e9a9"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,9 +34,6 @@
           <a href="index.html" class="icon icon-home">
             MLOps Pipeline Deployment
           </a>
-              <div class="version">
-                0.1.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -47,9 +44,17 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment on Azure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">App Deployment to Azure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Unit Tests</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Unit Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#running-tests">Running Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-coverage">Test Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-data">Test Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#expected-outcomes">Expected Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#debugging-failed-tests">Debugging Failed Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#skipping-slow-tests">Skipping Slow Tests</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
 </ul>
 
@@ -78,11 +83,73 @@
            <div itemprop="articleBody">
              
   <section id="unit-tests">
-<h1>Unit Tests<a class="headerlink" href="#unit-tests" title="Permalink to this heading"></a></h1>
-<p id="unit-test">To run the unit tests, execute:</p>
+<h1>Unit Tests<a class="headerlink" href="#unit-tests" title="Link to this heading"></a></h1>
+<section id="running-tests">
+<span id="unit-test"></span><h2>Running Tests<a class="headerlink" href="#running-tests" title="Link to this heading"></a></h2>
+<p>To run the complete test suite, execute:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>src/all_tests.py<span class="w"> </span>-v
 </pre></div>
 </div>
+<p>For more verbose output including test timing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>src/all_tests.py<span class="w"> </span>-vv
+</pre></div>
+</div>
+</section>
+<section id="test-coverage">
+<h2>Test Coverage<a class="headerlink" href="#test-coverage" title="Link to this heading"></a></h2>
+<p>The test suite covers the following areas:</p>
+<p><strong>Model Validation Tests:</strong></p>
+<ul class="simple">
+<li><p><strong>Model Binary Creation</strong> (<code class="docutils literal notranslate"><span class="pre">test_model_binary_created</span></code>): Verifies that the machine learning model can be trained and saved successfully as a pickle file.</p></li>
+</ul>
+<p><strong>API Endpoint Tests:</strong></p>
+<ul class="simple">
+<li><p><strong>Home Route</strong> (<code class="docutils literal notranslate"><span class="pre">test_home_route</span></code>): Ensures the homepage (<code class="docutils literal notranslate"><span class="pre">/</span></code>) loads properly and returns HTTP 200.</p></li>
+<li><p><strong>Form Prediction</strong> (<code class="docutils literal notranslate"><span class="pre">test_predict_route_post</span></code>): Tests the web form endpoint (<code class="docutils literal notranslate"><span class="pre">/predict</span></code>) with sample patient data, verifying predictions are returned in the expected format.</p></li>
+<li><p><strong>API Prediction</strong> (<code class="docutils literal notranslate"><span class="pre">test_predict_api_route</span></code>): Tests the JSON API endpoint (<code class="docutils literal notranslate"><span class="pre">/predict_api</span></code>) with structured data, ensuring it returns integer predictions.</p></li>
+<li><p><strong>HTTP Method Validation</strong> (<code class="docutils literal notranslate"><span class="pre">test_predict_route_get</span></code>): Confirms that GET requests to prediction endpoints are handled appropriately (should not allow form submissions via GET).</p></li>
+</ul>
+</section>
+<section id="test-data">
+<h2>Test Data<a class="headerlink" href="#test-data" title="Link to this heading"></a></h2>
+<p>The tests use realistic sample data representing typical insurance prediction scenarios:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="s1">&#39;25&#39;</span><span class="p">,</span>        <span class="c1"># Young adult</span>
+    <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span>      <span class="c1"># Gender</span>
+    <span class="s1">&#39;bmi&#39;</span><span class="p">:</span> <span class="s1">&#39;22.5&#39;</span><span class="p">,</span>      <span class="c1"># Normal weight</span>
+    <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>    <span class="c1"># No children</span>
+    <span class="s1">&#39;smoker&#39;</span><span class="p">:</span> <span class="s1">&#39;no&#39;</span><span class="p">,</span>     <span class="c1"># Non-smoker</span>
+    <span class="s1">&#39;region&#39;</span><span class="p">:</span> <span class="s1">&#39;southwest&#39;</span>  <span class="c1"># US region</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="expected-outcomes">
+<h2>Expected Outcomes<a class="headerlink" href="#expected-outcomes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>All tests should pass</strong> in a properly configured environment</p></li>
+<li><p><strong>Model training may take 1-2 minutes</strong> on first run (<code class="docutils literal notranslate"><span class="pre">test_model_binary_created</span></code>)</p></li>
+<li><p><strong>API responses should return integer dollar amounts</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">3250</span></code> for $3,250)</p></li>
+<li><p><strong>HTTP status codes should be 200</strong> for successful requests</p></li>
+</ul>
+</section>
+<section id="debugging-failed-tests">
+<h2>Debugging Failed Tests<a class="headerlink" href="#debugging-failed-tests" title="Link to this heading"></a></h2>
+<p>If tests fail, check:</p>
+<ol class="arabic simple">
+<li><p><strong>Model File</strong>: Ensure <code class="docutils literal notranslate"><span class="pre">model/pycaret-model.pkl</span></code> exists or can be created</p></li>
+<li><p><strong>Dependencies</strong>: Verify all required packages are installed</p></li>
+<li><p><strong>Flask App</strong>: Confirm the app can start (<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">src/app.py</span></code>)</p></li>
+<li><p><strong>Permissions</strong>: Check write permissions for model directory</p></li>
+</ol>
+</section>
+<section id="skipping-slow-tests">
+<h2>Skipping Slow Tests<a class="headerlink" href="#skipping-slow-tests" title="Link to this heading"></a></h2>
+<p>To skip the model training test during development:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>src/all_tests.py<span class="w"> </span>-v<span class="w"> </span>-k<span class="w"> </span><span class="s2">&quot;not test_model_binary_created&quot;</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 

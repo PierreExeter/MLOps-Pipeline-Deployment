@@ -39,11 +39,11 @@ Select the following options:
 
 Go to the Docker tab and fill the following details: 
 
-- Source : Azure Container Registry 
-- Registry : insurancemodel 
-- Image : mlops-insurance-prediction
-- tag : latest 
-- port : 5000
+- **Source** : ``Azure Container Registry`` 
+- **Registry** : ``insurancemodel`` 
+- **Image** : ``mlops-insurance-prediction``
+- **Tag** : ``latest`` 
+- **Port** : ``5000``
 
 7. The app is running and deployed to
    `https://insurance-predictions.azurewebsites.net <https://insurance-predictions.azurewebsites.net/>`__
@@ -182,31 +182,6 @@ Manual Trigger
 4. Select the ``main`` branch
 5. Click "Run workflow"
 
-Workflow Features
------------------
-
-✅ **Conditional Deployment**: Only deploys after successful CI tests
-
-✅ **Sequential Execution**: Python tests run first, then deployment (if tests pass)
-
-✅ **Docker Image Tagging**: Creates both ``latest`` and commit SHA tags
-
-✅ **Build Caching**: Uses registry caching for faster builds
-
-✅ **Auto-Deploy to Web App**: Automatically updates the running application
-
-✅ **Deployment Summary**: Provides detailed summary in GitHub Actions
-
-✅ **Manual Override**: Can deploy manually via workflow_dispatch without running tests
-
-Monitoring
-----------
-
-After deployment:
-
-- Check the Actions tab for workflow status
-- View deployment summary in the workflow run
-- Visit https://insurance-predictions.azurewebsites.net/ to verify
 
 Troubleshooting
 ---------------
@@ -249,12 +224,3 @@ Security Notes
 - Azure logout is performed after each workflow run
 - Consider rotating service principal credentials periodically
 
-Next Steps
-----------
-
-After successful deployment:
-
-1. Monitor application health at the Web App URL
-2. Set up monitoring and alerts in Azure Portal
-3. Configure custom domain if needed
-4. Review Azure App Service logs for any issues

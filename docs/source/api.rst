@@ -13,7 +13,7 @@ Predicts insurance costs based on input parameters.
 
 **Request Format:**
 
-.. code-block:: http
+.. code-block::
 
    POST /predict_api
    Content-Type: application/json
@@ -38,7 +38,7 @@ Predicts insurance costs based on input parameters.
 
 **Response Format:**
 
-.. code-block:: http
+.. code-block::
 
    HTTP 200 OK
    Content-Type: application/json

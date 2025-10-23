@@ -1,21 +1,21 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Deployment on Azure &mdash; MLOps Pipeline Deployment 0.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>App Deployment to Azure &mdash; MLOps Pipeline Deployment 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e031e9a9"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,9 +34,6 @@
           <a href="index.html" class="icon icon-home">
             MLOps Pipeline Deployment
           </a>
-              <div class="version">
-                0.1.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -47,7 +44,39 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Deployment on Azure</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">App Deployment to Azure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#manual-deployment">Manual Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#continuous-deployment-with-github-actions">Continuous Deployment with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-create-azure-service-principal">Step 1: Create Azure Service Principal</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-resource-ids">Get Resource IDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-service-principal">Create Service Principal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#grant-acr-push-permission">Grant ACR Push Permission</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-configure-github-secrets">Step 2: Configure GitHub Secrets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#azure-credentials">1. AZURE_CREDENTIALS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#azure-registry-username">2. AZURE_REGISTRY_USERNAME</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#azure-registry-password">3. AZURE_REGISTRY_PASSWORD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-verify-workflow-configuration">Step 3: Verify Workflow Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-4-understanding-workflow-execution">Step 4: Understanding Workflow Execution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#workflow-chain">Workflow Chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-trigger">Automatic Trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manual-trigger">Manual Trigger</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#workflow-fails-at-log-in-to-azure-container-registry">Workflow fails at “Log in to Azure Container Registry”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#workflow-fails-at-deploy-to-azure-web-app">Workflow fails at “Deploy to Azure Web App”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docker-build-fails">Docker build fails</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#image-tags">Image Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security-notes">Security Notes</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="unit_test.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
@@ -67,7 +96,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Deployment on Azure</li>
+      <li class="breadcrumb-item active">App Deployment to Azure</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/deployment.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -77,9 +106,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="deployment-on-azure">
-<h1>Deployment on Azure<a class="headerlink" href="#deployment-on-azure" title="Permalink to this heading"></a></h1>
-<ol class="arabic simple" id="deployment">
+  <section id="app-deployment-to-azure">
+<h1>App Deployment to Azure<a class="headerlink" href="#app-deployment-to-azure" title="Link to this heading"></a></h1>
+<section id="manual-deployment">
+<span id="deployment"></span><h2>Manual Deployment<a class="headerlink" href="#manual-deployment" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
 <li><p>Log in to Azure</p></li>
 <li><p>Create a new Azure Container Registry (ACR) named “insurancemodel.azurecr.io”</p></li>
 <li><p>Authenticate with Azure credentials</p></li>
@@ -93,7 +124,7 @@ Tick the box “admin user” to reveal the password.</p>
 <ol class="arabic simple" start="4">
 <li><p>Push the image to the Azure registry</p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">push</span> <span class="n">insurancemodel</span><span class="o">.</span><span class="n">azurecr</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">pycaret</span><span class="o">-</span><span class="n">insurance</span><span class="p">:</span><span class="n">latest</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">push</span> <span class="n">insurancemodel</span><span class="o">.</span><span class="n">azurecr</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">mlops</span><span class="o">-</span><span class="n">insurance</span><span class="o">-</span><span class="n">prediction</span><span class="p">:</span><span class="n">latest</span>
 </pre></div>
 </div>
 <p>This will take some time, depending on the size of the image. The image should appear in the ACR.</p>
@@ -110,16 +141,184 @@ Tick the box “admin user” to reveal the password.</p>
 </ol>
 <p>Go to the Docker tab and fill the following details:</p>
 <ul class="simple">
-<li><p>Source : Azure Container Registry</p></li>
-<li><p>Registry : insurancemodel</p></li>
-<li><p>Image : pycaret-insurance</p></li>
-<li><p>tag : latest</p></li>
-<li><p>port : 5000</p></li>
+<li><p><strong>Source</strong> : <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Container</span> <span class="pre">Registry</span></code></p></li>
+<li><p><strong>Registry</strong> : <code class="docutils literal notranslate"><span class="pre">insurancemodel</span></code></p></li>
+<li><p><strong>Image</strong> : <code class="docutils literal notranslate"><span class="pre">mlops-insurance-prediction</span></code></p></li>
+<li><p><strong>Tag</strong> : <code class="docutils literal notranslate"><span class="pre">latest</span></code></p></li>
+<li><p><strong>Port</strong> : <code class="docutils literal notranslate"><span class="pre">5000</span></code></p></li>
 </ul>
 <ol class="arabic simple" start="7">
 <li><p>The app is running and deployed to
 <a class="reference external" href="https://insurance-predictions.azurewebsites.net/">https://insurance-predictions.azurewebsites.net</a></p></li>
 </ol>
+</section>
+<section id="continuous-deployment-with-github-actions">
+<h2>Continuous Deployment with GitHub Actions<a class="headerlink" href="#continuous-deployment-with-github-actions" title="Link to this heading"></a></h2>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Azure CLI installed and logged in</p></li>
+<li><p>Azure Container Registry: <code class="docutils literal notranslate"><span class="pre">insurancemodel</span></code></p></li>
+<li><p>Azure Web App: <code class="docutils literal notranslate"><span class="pre">insurance-predictions</span></code></p></li>
+<li><p>GitHub repository with appropriate permissions</p></li>
+</ul>
+</section>
+<section id="step-1-create-azure-service-principal">
+<h2>Step 1: Create Azure Service Principal<a class="headerlink" href="#step-1-create-azure-service-principal" title="Link to this heading"></a></h2>
+<p>Run the following commands in Azure CLI to create a service principal with the necessary permissions.</p>
+<section id="get-resource-ids">
+<h3>Get Resource IDs<a class="headerlink" href="#get-resource-ids" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get ACR resource ID</span>
+<span class="nv">ACR_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>acr<span class="w"> </span>show<span class="w"> </span>--name<span class="w"> </span>insurancemodel<span class="w"> </span>--query<span class="w"> </span>id<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
+
+<span class="c1"># Get Web App resource ID</span>
+<span class="nv">WEBAPP_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>webapp<span class="w"> </span>show<span class="w"> </span>--name<span class="w"> </span>insurance-predictions<span class="w"> </span>--query<span class="w"> </span>id<span class="w"> </span>-o<span class="w"> </span>tsv<span class="w"> </span>--resource-group<span class="w"> </span>&lt;your-resource-group&gt;<span class="k">)</span>
+
+<span class="c1"># Verify both IDs are retrieved</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ACR ID: </span><span class="nv">$ACR_ID</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;WebApp ID: </span><span class="nv">$WEBAPP_ID</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="create-service-principal">
+<h3>Create Service Principal<a class="headerlink" href="#create-service-principal" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>az<span class="w"> </span>ad<span class="w"> </span>sp<span class="w"> </span>create-for-rbac<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span><span class="s2">&quot;github-actions-mlops-deployment&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--role<span class="w"> </span>contributor<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--scopes<span class="w"> </span><span class="nv">$ACR_ID</span><span class="w"> </span><span class="nv">$WEBAPP_ID</span>
+</pre></div>
+</div>
+<p><strong>Save the output!</strong> It will look like:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;appId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xxxx-xxxx-xxxx-xxxx&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;displayName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;github-actions-mlops-deployment&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xxxx-xxxx-xxxx-xxxx&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tenant&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xxxx-xxxx-xxxx-xxxx&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="grant-acr-push-permission">
+<h3>Grant ACR Push Permission<a class="headerlink" href="#grant-acr-push-permission" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>az<span class="w"> </span>role<span class="w"> </span>assignment<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--assignee<span class="w"> </span>&lt;appId-from-above&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--scope<span class="w"> </span><span class="nv">$ACR_ID</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--role<span class="w"> </span>AcrPush
+</pre></div>
+</div>
+</section>
+</section>
+<section id="step-2-configure-github-secrets">
+<h2>Step 2: Configure GitHub Secrets<a class="headerlink" href="#step-2-configure-github-secrets" title="Link to this heading"></a></h2>
+<p>Go to your GitHub repository → Settings → Secrets and variables → Actions → New repository secret</p>
+<p>Add the following secrets:</p>
+<section id="azure-credentials">
+<h3>1. AZURE_CREDENTIALS<a class="headerlink" href="#azure-credentials" title="Link to this heading"></a></h3>
+<p>Format the service principal output as JSON:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;clientId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;appId from service principal&gt;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;clientSecret&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;password from service principal&gt;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;subscriptionId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;run: az account show --query id -o tsv&gt;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tenantId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;tenant from service principal&gt;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="azure-registry-username">
+<h3>2. AZURE_REGISTRY_USERNAME<a class="headerlink" href="#azure-registry-username" title="Link to this heading"></a></h3>
+<p>Value: <code class="docutils literal notranslate"><span class="pre">&lt;appId</span> <span class="pre">from</span> <span class="pre">service</span> <span class="pre">principal&gt;</span></code></p>
+</section>
+<section id="azure-registry-password">
+<h3>3. AZURE_REGISTRY_PASSWORD<a class="headerlink" href="#azure-registry-password" title="Link to this heading"></a></h3>
+<p>Value: <code class="docutils literal notranslate"><span class="pre">&lt;password</span> <span class="pre">from</span> <span class="pre">service</span> <span class="pre">principal&gt;</span></code></p>
+</section>
+</section>
+<section id="step-3-verify-workflow-configuration">
+<h2>Step 3: Verify Workflow Configuration<a class="headerlink" href="#step-3-verify-workflow-configuration" title="Link to this heading"></a></h2>
+<p>The workflow file <code class="docutils literal notranslate"><span class="pre">.github/workflows/azure-deploy.yml</span></code> is configured with:</p>
+<ul class="simple">
+<li><p><strong>Registry Name</strong>: <code class="docutils literal notranslate"><span class="pre">insurancemodel</span></code></p></li>
+<li><p><strong>Image Name</strong>: <code class="docutils literal notranslate"><span class="pre">mlops-insurance-prediction</span></code></p></li>
+<li><p><strong>Web App Name</strong>: <code class="docutils literal notranslate"><span class="pre">insurance-predictions</span></code></p></li>
+</ul>
+<p>If any of these need to be changed, edit the <code class="docutils literal notranslate"><span class="pre">env:</span></code> section in the workflow file.</p>
+</section>
+<section id="step-4-understanding-workflow-execution">
+<h2>Step 4: Understanding Workflow Execution<a class="headerlink" href="#step-4-understanding-workflow-execution" title="Link to this heading"></a></h2>
+<section id="workflow-chain">
+<h3>Workflow Chain<a class="headerlink" href="#workflow-chain" title="Link to this heading"></a></h3>
+<p>When you push to the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch:</p>
+<ol class="arabic simple">
+<li><p><strong>Python Application</strong> workflow runs first (tests and linting)</p></li>
+<li><p><strong>Only if tests pass</strong>, the Azure deployment workflow triggers automatically</p></li>
+<li><p>If tests fail, deployment is skipped (preventing broken code from being deployed)</p></li>
+</ol>
+</section>
+<section id="automatic-trigger">
+<h3>Automatic Trigger<a class="headerlink" href="#automatic-trigger" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Create a pull request and merge it to <code class="docutils literal notranslate"><span class="pre">main</span></code></p></li>
+<li><p>The Python application workflow runs first</p></li>
+<li><p>If successful, the deployment workflow triggers automatically</p></li>
+<li><p>Monitor progress in the Actions tab</p></li>
+</ol>
+</section>
+<section id="manual-trigger">
+<h3>Manual Trigger<a class="headerlink" href="#manual-trigger" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Go to Actions tab in GitHub</p></li>
+<li><p>Select “Deploy to Azure Container Registry and Web App”</p></li>
+<li><p>Click “Run workflow”</p></li>
+<li><p>Select the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch</p></li>
+<li><p>Click “Run workflow”</p></li>
+</ol>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="workflow-fails-at-log-in-to-azure-container-registry">
+<h3>Workflow fails at “Log in to Azure Container Registry”<a class="headerlink" href="#workflow-fails-at-log-in-to-azure-container-registry" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Verify <code class="docutils literal notranslate"><span class="pre">AZURE_REGISTRY_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">AZURE_REGISTRY_PASSWORD</span></code> are correct</p></li>
+<li><p>Check service principal has AcrPush role</p></li>
+</ul>
+</section>
+<section id="workflow-fails-at-deploy-to-azure-web-app">
+<h3>Workflow fails at “Deploy to Azure Web App”<a class="headerlink" href="#workflow-fails-at-deploy-to-azure-web-app" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Verify <code class="docutils literal notranslate"><span class="pre">AZURE_CREDENTIALS</span></code> secret is properly formatted JSON</p></li>
+<li><p>Check service principal has contributor role on Web App</p></li>
+<li><p>Ensure Web App is configured to use containers</p></li>
+</ul>
+</section>
+<section id="docker-build-fails">
+<h3>Docker build fails<a class="headerlink" href="#docker-build-fails" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Check Dockerfile syntax</p></li>
+<li><p>Verify all required files are present in repository</p></li>
+<li><p>Check build logs for specific errors</p></li>
+</ul>
+</section>
+</section>
+<section id="image-tags">
+<h2>Image Tags<a class="headerlink" href="#image-tags" title="Link to this heading"></a></h2>
+<p>The workflow creates two tags for each deployment:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">latest</span></code>: Always points to the most recent deployment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;commit-sha&gt;</span></code>: Specific commit version (e.g., <code class="docutils literal notranslate"><span class="pre">abc1234</span></code>)</p></li>
+</ul>
+<p>Full image path: <code class="docutils literal notranslate"><span class="pre">insurancemodel.azurecr.io/mlops-insurance-prediction:latest</span></code></p>
+</section>
+<section id="security-notes">
+<h2>Security Notes<a class="headerlink" href="#security-notes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Service principal credentials are stored as GitHub encrypted secrets</p></li>
+<li><p>Credentials are never exposed in logs</p></li>
+<li><p>Azure logout is performed after each workflow run</p></li>
+<li><p>Consider rotating service principal credentials periodically</p></li>
+</ul>
+</section>
 </section>
 
 
