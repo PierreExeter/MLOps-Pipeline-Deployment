@@ -5,9 +5,7 @@ Welcome to Insurance Predictor's documentation!
    :alt: app_screenshot
    :align: center
 
-   The app's interface.
-
-`VIEW DEPLOYED APP HERE <https://insurance-predictions.azurewebsites.net/>`__
+   `VIEW DEPLOYED APP HERE <https://insurance-predictions.azurewebsites.net/>`__
 
 This project demonstrates a MLOps pipeline for deploying a machine learning model into a production-ready web application. The goal is to help an insurance company forecast patient charges using input like age, gender, BMI, number of children, and smoking status.
 
