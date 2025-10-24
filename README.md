@@ -1,8 +1,19 @@
 # MLOps Pipeline Deployment
 
-![app_screenshot](docs/img/app_screenshot.png)
 
-[VIEW DEPLOYED APP HERE](https://insurance-predictions.azurewebsites.net/)
+<p align="center">
+  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/PierreExeter/MLOps-Pipeline-Deployment/azure-deploy.yml">
+  <img alt="Read the Docs" src="https://img.shields.io/readthedocs/mlops-pipeline-deployment?link=https%3A%2F%2Fmlops-pipeline-deployment.readthedocs.io%2Fen%2Flatest%2F">
+  <img alt="GitHub License" src="https://img.shields.io/github/license/PierreExeter/MLOps-Pipeline-Deployment?color">
+</p>
+
+<p align="center">
+  <img alt="app_screenshot" src="docs/img/app_screenshot.png">
+</p>
+
+<p align="center">
+  <a href="https://insurance-predictions.azurewebsites.net/">VIEW DEPLOYED APP</a>
+</p>
 
 This project demonstrates a MLOps pipeline for deploying a machine learning model into a production-ready web application. The goal is to help an insurance company forecast patient charges using input like age, gender, BMI, number of children, and smoking status.
 
@@ -10,90 +21,41 @@ The solution includes:
 - A **machine learning** model trained to predict insurance charges
 - A **Flask back-end** to serve predictions
 - A **HTML / CSS front-end** for user input
-- Containerization with **Docker**
-- Cloud deployment on **Microsoft Azure**
 - A CI/CD pipeline with **Github Actions**
+- Unit tests with **Pytest**
+- Containerization with **Docker**
+- Automatic cloud deployment on **Microsoft Azure**
 - A product **documentation**
 
+<p align="center">
+  <img alt="architecture_diagram" src="docs/img/app_diagram.svg">
+</p>
 
-## Docker Install (recommended)
+<p align="center">
+Architecture diagram
+</p>
 
-1. Clone the repository
 
-```
-git clone https://github.com/PierreExeter/MLOps-Pipeline-Deployment
-```
+# Install
 
-2. Build the image
+## Docker install (recommended)
+
+
+1. Build the image
 
 ```
 docker build -t insurancemodel.azurecr.io/mlops-insurance-prediction:latest .
 ```
 
-The diferent elements in this command are : 
-- Azure registry name : insurancemodel.azurecr.io
-- Docker image name : mlops-insurance-prediction
-- tag : latest
-
-
-3. Run the Docker container
+2. Run the container
 ```
 docker run -d -p 5000:5000 insurancemodel.azurecr.io/mlops-insurance-prediction
 ```
 
-The web app is served on [http://localhost:5000/](http://localhost:5000/)
-
-4. Open the container (optional)
-
-```
-docker exec -it <container-id> /bin/bash
-```
-
-5. Stop the container
-```
-docker stop <container-id>
-```
-
-## Azure Deployment
-
-1. Log in to Azure
-2. Create a new Azure Container Registry (ACR) named "insurancemodel.azurecr.io"
-3. Authenticate with Azure credentials
-
-```
-docker login insurancemodel.azurecr.io
-```
-The username is name of the registry, in this example "insurancemodel".
-The password can be found in Azure Container Registry > Settings > Access keys. Tick the box "admin user" to reveal the password.
-
-4. Push the image to ACR
-```
-docker push insurancemodel.azurecr.io/mlops-insurance-prediction:latest
-```
-
-This will take some time, depending on the size of the image. The image should appear in the ACR.
-
-5. Create a web app on Azure
-Azure portal > create a resource > web app > create > Choose a name (e.g. insurance-predictions)
- 
-Select the following options:
-- Publish : Choose Container
-- Choose a region and a pricing plan (there is a free plan called "Free F1").
- 
-6. Link the ACR image to your application
-
-Go to the Docker tab and fill the following details:
-- Source : Azure Container Registry
-- Registry : insurancemodel
-- Image : mlops-insurance-prediction
-- tag : latest
-- port : 5000
-
-7. The app is running and deployed to [https://insurance-predictions.azurewebsites.net](https://insurance-predictions.azurewebsites.net/) 
+The web app is served on [http://localhost:5000/](http://localhost:5000/).
 
 
-
-## Local Install
+## Local install
 
 1. Clone the repository
 
@@ -136,11 +98,12 @@ python src/app.py
 python src/app.py --production
 ```
 
-The web app is served on [http://localhost:5000/](http://localhost:5000/)
+The web app is served on [http://localhost:5000/](http://localhost:5000/).
 
-7. Test sending a request to the API
+# Documentation
 
-```
-python src/api_call_example.py
-```
+<p align="center">
+  <a href="https://mlops-pipeline-deployment.readthedocs.io/en/latest/index.html">VIEW DOCUMENTATION</a>
+</p>
+
 
