@@ -5,7 +5,7 @@ Welcome to Insurance Predictor's documentation!
    :alt: app_screenshot
    :align: center
 
-   The app's interface.
+   `VIEW DEPLOYED APP HERE <https://insurance-predictions.azurewebsites.net/>`__
 
 `VIEW DEPLOYED APP HERE <https://insurance-predictions.azurewebsites.net/>`__
 
